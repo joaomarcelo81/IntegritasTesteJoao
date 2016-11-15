@@ -14,7 +14,7 @@ namespace IntegritasTeste.Web
         protected void Application_Start()
         {
 
-
+            //teste
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
