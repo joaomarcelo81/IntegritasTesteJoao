@@ -14,10 +14,6 @@ namespace IntegritasTeste.Web
         protected void Application_Start()
         {
 
-            //teste agora ag
-
-
-
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
