@@ -5,6 +5,7 @@ using IntegritasTeste.Domain;
 using IntegritasTeste.Domain.Common;
 using IntegritasTeste.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IntegritasTeste.Web.Controllers
 {
@@ -71,12 +72,11 @@ namespace IntegritasTeste.Web.Controllers
 
 
 
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult Remove(Product product)
         {
-
             var cart = new Cart();
             var httpCookie = HttpContext.Request.Cookies.Get(CacheRepositories.ShoppingCart);
             if (httpCookie != null)
@@ -85,18 +85,7 @@ namespace IntegritasTeste.Web.Controllers
                 cart = CacheRepository.GetObjectCache<Cart>(CacheRepositories.ShoppingCart + CartId.ToString());
                 if (cart != null)
                 {
-                    var isAdded = false;
-
-                    foreach (var item in cart.products)
-                        if (item.ProductID == product.ProductID)
-                        {
-                            isAdded = true;
-                            item.Quantity--;
-                        }
-
-
-                    if (!isAdded)
-                        cart.RemoveItem(product);
+                    cart.products = cart.products.Where(x => x.ProductID != product.ProductID).ToList().ToList(); 
                 }
 
             }
@@ -104,19 +93,48 @@ namespace IntegritasTeste.Web.Controllers
             HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
             HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
             CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
+            return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult Update(List<Product> products)
+        {
+            var cart = new Cart();
+            var httpCookie = HttpContext.Request.Cookies.Get(CacheRepositories.ShoppingCart);
+            if (httpCookie != null)
+            {
+                var CartId = httpCookie.Value;
+                cart = CacheRepository.GetObjectCache<Cart>(CacheRepositories.ShoppingCart + CartId.ToString());
+               
+                if (cart != null)
+                {
 
-
-
-          
-            return Json(true, JsonRequestBehavior.AllowGet);
+                    var newList = new List<Product>();
+                    foreach (var ItemProduct in products)
+                    {
+                        var product  = cart.products.FirstOrDefault(x => x.ProductID == ItemProduct.ProductID);
+                        if (product != null)
+                        {
+                            product.Quantity = ItemProduct.Quantity;
+                            if (product.Quantity > 0)
+                                newList.Add(product);
+                        }
+                    }
+                    cart.products = newList;
+                }
+            }
+            HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
+            HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
+            HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
+            CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
+            return Json(new { success = true, message = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult SetCustomer(Customer customer)
         {
             Cart.SetCustomer(customer);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
         }
     }
 }
+

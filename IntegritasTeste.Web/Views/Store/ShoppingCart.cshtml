@@ -11,9 +11,9 @@
                             <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
                         </div>
                         <div class="col-xs-6">
-                            <button type="button" class="btn btn-primary btn-sm btn-block">
+                            <a class="btn btn-primary btn-sm btn-block" href="/Products">
                                 <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -21,10 +21,10 @@
             <div class="panel-body">
                 
                 <div ng-repeat="product in cart.products">
-                    <div class="row">
-                        <div class="col-xs-2">
-                            <img class="img-responsive" src="http://placehold.it/100x70">
-                        </div>
+                    <div class="row product" ProductID="{{ product.ProductID }}">
+                        <div class=" col-xs-2">
+                        <img class="img-responsive" src="http://placehold.it/100x70">
+                    </div>
                         <div class="col-xs-4">
                             <h4 class="product-name">
                                 <strong>{{ product.Name }}</strong>
@@ -38,10 +38,10 @@
                                 <h6><strong>${{ GetCurrentPrice(product.Prices) }} <span class="text-muted">x</span></strong></h6>
                             </div>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm" value="{{ product.Quantity }}">
+                                <input type="text" class="form-control input-sm productQuantity" value="{{ product.Quantity }}">
                             </div>
                             <div class="col-xs-2">
-                                <button type="button" class="btn btn-link btn-xs">
+                                <button type="button" class="btn btn-link btn-xs" ng-click="RemoveCart($index)">
                                     <span class="glyphicon glyphicon-trash"> </span>
                                 </button>
                             </div>
@@ -55,7 +55,7 @@
                                     <h6 class="text-right">Added items?</h6>
                                 </div>
                                 <div class="col-xs-3">
-                                    <button type="button" class="btn btn-default btn-sm btn-block">
+                                    <button type="button" class="btn btn-default btn-sm btn-block" ng-click="UpdateCart()">
                                         Update cart
                                     </button>
                                 </div>
@@ -65,7 +65,7 @@
             <div class="panel-footer">
                 <div class="row text-center">
                     <div class="col-xs-9">
-                        <h4 class="text-right">Total <strong>${{ TotalCart() }}</strong></h4>
+                        <h4 class="text-right">Total <strong>${{ (TotalCart()).toFixed(2); }}</strong></h4>
                     </div>
                     <div class="col-xs-3">
                         <button type="button" class="btn btn-success btn-block">
@@ -75,3 +75,4 @@
                 </div>
             </div>
         </div>
+    </div></div>

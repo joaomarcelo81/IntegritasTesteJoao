@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="pt-br" />
-    <title>AngularJS: Single Page com ngView e ngRoute</title>
+    <title>Integritas Test Joao</title>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
 </head>
 
@@ -15,21 +15,24 @@
         <li ng-class="{active: activetab == '/ShoppingCart'}"><a href="/ShoppingCart">ShoppingCart</a></li>
     </ul>
 
-    <div ng-view>
-        @RenderBody()
-    </div>
+<div ng-view>
+    @RenderBody()
+</div>
+    <script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/angular.min.js"></script>
+    <script src="~/Content/Scripts/angular-route.min.js"></script>
+    
+    
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module('app', ['ngRoute']);
 
-    <script type="text/javascript">
-        var app = angular.module('app', ['ngRoute']);
+    app.config(function($routeProvider, $locationProvider) {
+        // remove o # da url
+        $locationProvider.html5Mode(true);
 
-        app.config(function ($routeProvider, $locationProvider) {
-            // remove o # da url
-            $locationProvider.html5Mode(true);
-
-            $routeProvider
+        $routeProvider
             //.when('/', {
             //    templateUrl: '/Home',
             //    controller: 'HomeController',
@@ -49,72 +52,129 @@
 
             // caso não seja nenhum desses, redirecione para a rota '/'
             .otherwise({ redirectTo: '/Products' });
-        });
+    });
 
 
-        app.controller('HomeController', function ($rootScope, $location, $http) {
-            $rootScope.activetab = $location.path();
-        });
+    app.controller('HomeController', function($rootScope, $location, $http) {
+        $rootScope.activetab = $location.path();
+    });
 
-        app.controller('StoreController', function ($rootScope, $location, $http) {
-            $rootScope.activetab = $location.path();
-        });
-        app.controller('ShoppingCartController', function ($rootScope, $location, $http) {
-            $rootScope.activetab = $location.path();
+    app.controller('StoreController', function($rootScope, $location, $http) {
+        $rootScope.activetab = $location.path();
+    });
+    app.controller('ShoppingCartController', function($rootScope, $location, $http) {
+        $rootScope.activetab = $location.path();
 
-            $rootScope.GetCurrentPrice = function (Prices) {
+        $rootScope.GetCurrentPrice = function(Prices) {
 
-                for (var i = 0; i < Prices.length; i++) {
-                    return Prices[i].Value;
-                }
-                return 0;
-
-            };
-
-            $rootScope.TotalCart = function () {
-                var total = 0;
-
-                products = $rootScope.cart.products;
-                for (var i = 0; i < products.length; i++) {
-                    total += $rootScope.GetCurrentPrice(products[i].Prices) * products[i].Quantity;
-                }
-                return total;
+            for (var i = 0; i < Prices.length; i++) {
+                return Prices[i].Value;
             }
+            return 0;
 
-            $http.get('/Cart/Get').then(function (cart) {
+        };
+
+        $rootScope.TotalCart = function() {
+            var total = 0;
+
+            products = $rootScope.cart.products;
+            for (var i = 0; i < products.length; i++) {
+                total += $rootScope.GetCurrentPrice(products[i].Prices) * products[i].Quantity;
+            }
+            return total;
+        }
+        var updateCart = function(){
+            $http.get('/Cart/Get').then(function(cart) {
                 $rootScope.cart = cart.data;
-            }, function (error) {
-                //  ngDialog.close();
-            });
-
-        });
-        app.controller('ProductsController', function ($rootScope, $location, $http) {
-            $rootScope.activetab = $location.path();
-            //$rootScope.message = 'Everyone come and see how good I look!';
-
-            $rootScope.AddCart = function (productId) {
-                //alert(productId);
-
-                var product = $rootScope.produtos[productId];
-
-                $http.post("/Cart/Add", product).then(function (response) {
-
-                   if (response.data.success) {
-                       //ngDialog.close();
-                       //$state.go('app.listarPedido');
-                   } else {
-                       //ngDialog.close();
-                       alert('Erro no sitema');
-                       //    $state.go('app.listarPedido');
-                   }
-                },
-                function () {
-                    vm.authMsg = 'Server Request Error';
-                });
-            };
-
+            }, function(error) {
             
-          /*  $rootScope.categories = [
+            });
+        }
+        updateCart();
+
+
+        $rootScope.RemoveCart = function (productId) {
+            //alert(productId);
+
+            var product = $rootScope.produtos[productId];
+
+            $http.post("/Cart/Remove", product).then(function (response) {
+
+                if (response.data.success) {
+
+                    $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was removed from your cart!");
+                    $('#AddProductToCart').modal('show');
+                    updateCart();
+
+                } else {
+                    alert('Erro no sitema');
+                }
+            },
+                function () {
+                    alert('Erro no sitema');
+                });
+        };
+
+        $rootScope.UpdateCart = function () {
+
+            var products = [];
+
+
+
+            for (var i = 0; i < $('div.product').length; i++) {
+                products.push({
+                    ProductID: $($('div.product')[i]).attr('productid'),
+                    Quantity: $($('div.product')[i]).find('input').val()
+                });
+            }
+            
+
+            $http.post("/Cart/Update", products).then(function (response) {
+                if (response.data.success) {
+                    $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was removed from your cart!");
+                    $('#AddProductToCart').modal('show');
+                    updateCart();
+
+                } else {
+                    alert('Erro no sitema');
+                }
+            },
+                function () {
+                    alert('Erro no sitema');
+                });
+        };
+
+
+
+
+    });
+    app.controller('ProductsController', function($rootScope, $location, $http) {
+        $rootScope.activetab = $location.path();
+        //$rootScope.message = 'Everyone come and see how good I look!';
+
+        $rootScope.AddCart = function(productId) {
+            //alert(productId);
+
+            var product = $rootScope.produtos[productId];
+
+            $http.post("/Cart/Add", product).then(function(response) {
+
+                    if (response.data.success) {
+
+                        $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was added to your cart!");
+                        $('#AddProductToCart').modal('show');
+
+                    } else {
+                        alert('Erro no sitema');
+                    }
+                },
+                function() {
+                    alert('Erro no sitema');
+                });
+        };
+
+
+        /*  $rootScope.categories = [
        { id: 0, name: "Select a category..."},
        { id: 1, name: "Cars", group : "- Vehicles -" },
        { id: 2, name: "Commercial vehicles", group : "- Vehicles -" },
@@ -122,36 +182,67 @@
             ];*/
 
 
-            $rootScope.change = function () {
-                
-            };
+        $rootScope.change = function() {
 
-            $http.get('/Api/Product').then(function (produtos) {
-                $rootScope.produtos = produtos.data;
-            }, function (error) {
-                //  ngDialog.close();
-            });
+        };
 
-
-            $http.get('/Api/Category').then(function (categories) {
-                $rootScope.categories = categories.data;
-            }, function (error) {
-                //  ngDialog.close();
-            });
-
-           
-
-
-
-
-
-
-            console.log($rootScope.produtos);
-
+        $http.get('/Api/Product').then(function(produtos) {
+            $rootScope.produtos = produtos.data;
+        }, function(error) {
+            //  ngDialog.close();
         });
 
 
-    </script>
+        $http.get('/Api/Category').then(function(categories) {
+            $rootScope.categories = categories.data;
+        }, function(error) {
+        
+        });
+
+
+        
+
+    });
+
+
+</script>
+
+
+    <div class="modal fade" id="AddProductToCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+    </div>
 
 </body>
 </html>
