@@ -5,6 +5,10 @@
 
 <div class="container" ng-controller="ProductsController as table1">
     <div class="well well-sm">
+        <select name="category-group" id="categoryGroup"
+                ng-model="itemSelected" ng-change="onCategoryChange(itemSelected)"
+                ng-options="category.Name for category in categories"></select>
+
         <strong>Category Title</strong>
         <div class="btn-group">
             <a href="#" id="list" class="btn btn-default btn-sm">
