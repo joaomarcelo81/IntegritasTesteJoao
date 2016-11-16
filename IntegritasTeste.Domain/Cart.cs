@@ -10,8 +10,7 @@ namespace IntegritasTeste.Domain
 {
     public class Cart
     {
-        public Guid CartId { get; set; }
-        public string Session { get; set; }
+        public Guid CartId { get; set; }        
         private Customer _customer { get; set; }
         public Customer customer
         {
@@ -23,15 +22,18 @@ namespace IntegritasTeste.Domain
         {
             get { return _products ?? (_products = new List<Product>()); }
             set { _products = value; }
-        }
+        }       
 
         public Cart()
         {
-            
+            if(CartId == Guid.Empty)
+                CartId = Guid.NewGuid();
         }
 
         public Cart(Customer Customer)
         {
+            if (CartId == Guid.Empty)
+                CartId = Guid.NewGuid();
             _customer = Customer;
         }
 

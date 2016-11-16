@@ -12,11 +12,9 @@ namespace IntegritasTeste.Web.Controllers
 {
     public class CustomerController : CommonWebApiController<Customer>
     {
-
-      
-        public CustomerController(IBaseApplication<Customer> customerService)
+        public CustomerController(IBaseApplication<Customer> application)
         {
-            app = customerService;
+            app = application;
         }
     }
 }

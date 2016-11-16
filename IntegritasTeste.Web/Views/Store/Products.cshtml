@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+    
+}
+
+<div class="container" ng-controller="ProductsController as table1">
+    <div class="well well-sm">
+        <strong>Category Title</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-th-list">
+                </span>List
+            </a> <a href="#" id="grid" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-th"></span>Grid
+            </a>
+        </div>
+    </div>
+    <div id="products" class="row list-group" ng-repeat="produto in produtos">
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        {{ produto.Name }}
+                    </h4>
+                    <p class="group inner list-group-item-text">
+                        {{ produto.Description }}
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                {{ produto.Value }}
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <button class="btn btn-success" ng-click="AddCart($index)">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\app\module\" />
     <Folder Include="Content\Controller\" />
     <Folder Include="Content\Module\" />
     <Folder Include="Content\View\" />
@@ -162,10 +163,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonWebApiController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +204,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\ShoppingCart.cshtml" />
+    <Content Include="Views\Store\Checkout.cshtml" />
+    <Content Include="Views\Store\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntegritasTeste.Application\IntegritasTeste.Application.csproj">

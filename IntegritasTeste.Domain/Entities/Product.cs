@@ -37,5 +37,9 @@ namespace IntegritasTeste.Domain.Entities
                 return price;
             }
         }
+
+
+        [NotMapped]
+        public int Quantity { get; set; }
     }
 }

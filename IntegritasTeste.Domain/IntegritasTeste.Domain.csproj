@@ -66,9 +66,13 @@
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Interface\Aplications\IBaseApplication.cs" />
+    <Compile Include="Interface\Aplications\ICategoryApplication.cs" />
     <Compile Include="Interface\Aplications\ICustomerApplication.cs" />
+    <Compile Include="Interface\Aplications\IProductApplication.cs" />
+    <Compile Include="Interface\Repositories\ICategoryRepository.cs" />
     <Compile Include="Interface\Repositories\ICustomerRepostory.cs" />
     <Compile Include="Interface\Repositories\IBaseRepository.cs" />
+    <Compile Include="Interface\Repositories\IProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

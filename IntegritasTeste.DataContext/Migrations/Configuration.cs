@@ -35,14 +35,29 @@ namespace IntegritasTeste.DataContext.Migrations
 
                //  context.Categories.
 
-                //var Products = context.Products.Add(new Product()
-                //{
-                //    Name = "Banana",
-                //    Category = category,
-                //    Description = "Banana",
-                //    Prices = 
+                var product = new Product()
+                {
+                    Name = "Banana",
+                    Category = category,
+                    Description = "Banana"
 
-                //});
+                };
+
+
+
+                product.Prices.Add(new Price()
+                {
+                    StartDate = DateTime.Now.AddMonths(-1),
+                    LastDate = DateTime.Now.AddMonths(3),
+                    Value = 1.49M,
+                    Active = true
+
+
+
+                });
+
+
+                var Products = context.Products.Add(product);
             }
         }
     }

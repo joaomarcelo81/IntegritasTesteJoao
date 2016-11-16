@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+<h3>Vitrine</h3>   
+<p>{{ message }}</p> 
+        <div class="table-responsive b0" ng-controller="HomeCtrl as table1">
+    <table datatable="ng" class="rtable table-hover" @*dt-options="table1.dtPedidosOptions"*@>
+        <thead>
+            <tr>
+                <th style="width:80px">
+                    <strong>Nome</strong>
+                </th>
+         
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="pedido in pedidos">
+                <td>{{ pedido.Name }} </td>
+                @*<td>0001</td>
+                <td>Product 1</td>
+                <td>Description for Product</td>
+                <td>$ 12.20</td>
+                <td>233</td>
+                <td class="text-center">
+                    <span class="label label-success">Stock</span>
+                </td>
+                <td>04/10/2015</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-default">
+                        <em class="fa fa-search"></em>
+                    </button>
+                </td>*@
+            </tr>
+        </tbody>
+    </table>
+</div>
