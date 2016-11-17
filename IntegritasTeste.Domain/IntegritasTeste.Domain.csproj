@@ -62,6 +62,7 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Logger.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\Product.cs" />

@@ -33,6 +33,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     Name = "Vegetables",
                     Description = "Vegetables"
                 });
+                context.SaveChanges();
             }
 
             if (!context.Products.Any() && context.Categories.Any())
@@ -282,7 +283,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                 });
 
-
+                context.SaveChanges();
 
 
             }

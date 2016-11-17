@@ -131,7 +131,7 @@
 
             $http.post("/Cart/Update", products).then(function (response) {
                 if (response.data.success) {
-                    $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was removed from your cart!");
+                    $('#AddProductToCart div.modal-body p').html("Your shopping cart was updated!");                    
                     $('#AddProductToCart').modal('show');
                     updateCart();
 
@@ -149,11 +149,10 @@
 
     });
     app.controller('ProductsController', function($rootScope, $location, $http) {
-        $rootScope.activetab = $location.path();
-        //$rootScope.message = 'Everyone come and see how good I look!';
+        $rootScope.activetab = $location.path();       
 
         $rootScope.AddCart = function(productId) {
-            //alert(productId);
+            
 
             var product = $rootScope.produtos[productId];
 
@@ -161,7 +160,7 @@
 
                     if (response.data.success) {
 
-                        $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was added to your cart!");
+                        $('#AddProductToCart div.modal-body p').html("Product " + product.Name + " was removed from your cart!");
                         $('#AddProductToCart').modal('show');
 
                     } else {
@@ -173,23 +172,13 @@
                 });
         };
 
-
-        /*  $rootScope.categories = [
-       { id: 0, name: "Select a category..."},
-       { id: 1, name: "Cars", group : "- Vehicles -" },
-       { id: 2, name: "Commercial vehicles", group : "- Vehicles -" },
-       { id: 3, name: "Motorcycles", group : "- Vehicles -" }
-            ];*/
-
-
         $rootScope.change = function() {
 
         };
 
         $http.get('/Api/Product').then(function(produtos) {
             $rootScope.produtos = produtos.data;
-        }, function(error) {
-            //  ngDialog.close();
+        }, function(error) {            
         });
 
 

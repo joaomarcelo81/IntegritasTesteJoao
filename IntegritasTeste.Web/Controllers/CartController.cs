@@ -83,11 +83,12 @@ namespace IntegritasTeste.Web.Controllers
             {
                 var CartId = httpCookie.Value;
                 cart = CacheRepository.GetObjectCache<Cart>(CacheRepositories.ShoppingCart + CartId.ToString());
+                var newList = new List<Product>();
                 if (cart != null)
                 {
-                    cart.products = cart.products.Where(x => x.ProductID != product.ProductID).ToList().ToList(); 
+                   newList  = cart.products.Where(x => x.ProductID != product.ProductID).ToList();
                 }
-
+                cart.products = newList;
             }
             HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
             HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
