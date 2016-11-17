@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegritasTeste.DataContext
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{57A866F7-A89B-4D61-AC3E-5FA34D8BE76D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegritasTeste.Test.DataContext", "IntegritasTeste.Test.DataContext\IntegritasTeste.Test.DataContext.csproj", "{8E375D5C-9EE8-4A98-A930-9138C9E5B3C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegritasTeste.Test.Web", "IntegritasTeste.Test.DataContext\IntegritasTeste.Test.Web.csproj", "{8E375D5C-9EE8-4A98-A930-9138C9E5B3C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{2207F283-D248-4209-857A-F26B6DE807B7}"
 EndProject

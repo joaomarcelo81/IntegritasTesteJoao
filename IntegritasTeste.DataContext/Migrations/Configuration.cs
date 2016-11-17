@@ -20,30 +20,22 @@ namespace IntegritasTeste.DataContext.Migrations
         protected override void Seed(IntegritasTeste.DataContext.DataContext.IntegritasTesteDataContext context)
         {
 
-            if (!context.Categories.Any())
+         
+
+            if (!context.Products.Any())
             {
-                context.Categories.Add(new Category()
+
+                var category = new Category()
                 {
                     Name = "Fruits",
-                    Description = "Fruits"
-                });
-
-                context.Categories.Add(new Category()
-                {
-                    Name = "Vegetables",
-                    Description = "Vegetables"
-                });
-                context.SaveChanges();
-            }
-
-            if (!context.Products.Any() && context.Categories.Any())
-            {
-
-                var category = context.Categories.FirstOrDefault(x => x.Name == "Fruits");
+                    Description = "Fruits",
+                    Active = true,
+                    Products = new List<Product>()
+                };
 
 
                 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Banana",
                     Category = category,
@@ -61,7 +53,7 @@ namespace IntegritasTeste.DataContext.Migrations
                 });
 
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Apple",
                     Category = category,
@@ -79,7 +71,7 @@ namespace IntegritasTeste.DataContext.Migrations
                 });
 
           
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Bilberry",
                     Category = category,
@@ -96,7 +88,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                   });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Blackberry",
                     Category = category,
@@ -113,7 +105,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Blackcurrant",
                     Category = category,
@@ -130,7 +122,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                   });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Blueberry",
                     Category = category,
@@ -147,7 +139,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                   });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Boysenberry",
                     Category = category,
@@ -164,7 +156,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                  });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Currant",
                     Category = category,
@@ -181,7 +173,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Cherry",
                     Category = category,
@@ -198,7 +190,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Cherimoya",
                     Category = category,
@@ -215,7 +207,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Cloudberry",
                     Category = category,
@@ -232,7 +224,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Coconut",
                     Category = category,
@@ -249,7 +241,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                    });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Cranberry",
                     Category = category,
@@ -266,7 +258,7 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                   });
 
-                context.Products.Add(new Product()
+                category.Products.Add(new Product()
                 {
                     Name = "Cucumber",
                     Category = category,
@@ -283,9 +275,8 @@ namespace IntegritasTeste.DataContext.Migrations
                     }
                 });
 
+                context.Categories.Add(category);
                 context.SaveChanges();
-
-
             }
         }
     }

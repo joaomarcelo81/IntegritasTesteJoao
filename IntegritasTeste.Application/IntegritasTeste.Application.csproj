@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\LoggerApplication.cs" />
     <Compile Include="Application\CategoryApplication.cs" />
     <Compile Include="Application\ProductApplication.cs" />
     <Compile Include="BaseApplication.cs" />

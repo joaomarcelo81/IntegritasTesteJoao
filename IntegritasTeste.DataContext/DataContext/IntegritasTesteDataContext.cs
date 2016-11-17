@@ -26,6 +26,7 @@ namespace IntegritasTeste.DataContext.DataContext
         public DbSet<Product> Products { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Logger> Loggers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -61,7 +62,16 @@ namespace IntegritasTeste.DataContext.DataContext
                         x.ToTable("ProductPrice");
                     });
 
-
+            modelBuilder.Entity<Category>()
+               .HasMany(x => x.Products)
+               .WithMany()
+               .Map(
+                   x =>
+                   {
+                       x.MapLeftKey("CategoryID");
+                       x.MapRightKey("ProductID");
+                       x.ToTable("CategoryProduct");
+                   });
 
             modelBuilder.Entity<Order>()
              .HasMany(x => x.Products)

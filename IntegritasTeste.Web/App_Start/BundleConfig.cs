@@ -10,9 +10,10 @@ namespace IntegritasTeste.Web
         {
 
 
-            bundles.Add(new ScriptBundle("~/bundles/baseScripts").Include("~/Content/Scripts/angular.js"));
+            
 
-
+            bundles.Add(new ScriptBundle("~/bundles/baseScripts")
+    .IncludeDirectory("~/Content/Scripts", "*.js", true));
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             //            "~/Scripts/jquery-{version}.js"));
 

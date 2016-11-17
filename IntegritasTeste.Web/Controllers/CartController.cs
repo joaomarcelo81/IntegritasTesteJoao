@@ -65,13 +65,7 @@ namespace IntegritasTeste.Web.Controllers
                }
 
            }
-           HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
-           HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
-           HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
-           CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
-
-
-
+           UpdateCart(cart);
             return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -90,10 +84,7 @@ namespace IntegritasTeste.Web.Controllers
                 }
                 cart.products = newList;
             }
-            HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
-            HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
-            HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
-            CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
+            UpdateCart(cart);
             return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
         }
 
@@ -123,10 +114,7 @@ namespace IntegritasTeste.Web.Controllers
                     cart.products = newList;
                 }
             }
-            HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
-            HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
-            HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
-            CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
+            UpdateCart(cart);
             return Json(new { success = true, message = "success" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -135,6 +123,15 @@ namespace IntegritasTeste.Web.Controllers
         {
             Cart.SetCustomer(customer);
             return Json(new{success = true, message = "success"}, JsonRequestBehavior.AllowGet);
+        }
+
+        private void UpdateCart(Cart cart)
+        {
+            HttpContext.Response.Cookies.Remove(CacheRepositories.ShoppingCart);
+            HttpContext.Request.Cookies.Remove(CacheRepositories.ShoppingCart);
+            HttpContext.Response.Cookies.Add(new HttpCookie(CacheRepositories.ShoppingCart, cart.CartId.ToString()));
+            CacheRepository.SetObjectCache(cart, CacheRepositories.ShoppingCart + cart.CartId);
+
         }
     }
 }

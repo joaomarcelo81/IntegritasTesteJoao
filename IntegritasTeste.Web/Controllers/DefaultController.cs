@@ -17,6 +17,7 @@ namespace IntegritasTeste.Web.Controllers
             get { return _cacheRepository ?? (_cacheRepository = new CacheRepository()); }
             set { _cacheRepository = value; }
         }
+        
 
         private Cart _Cart { get; set; }
 
@@ -66,5 +67,9 @@ namespace IntegritasTeste.Web.Controllers
             }
             set { _Cart = value; }
         }
+
+
+
+    
     }
 }

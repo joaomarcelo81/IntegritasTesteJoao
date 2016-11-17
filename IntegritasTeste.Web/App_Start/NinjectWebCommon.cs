@@ -72,7 +72,7 @@ namespace IntegritasTeste.Web.App_Start
             kernel.Bind<ICustomerApplication>().To<CustomerApplication>();
             kernel.Bind<ICategoryApplication>().To<CategoryApplication>();
             kernel.Bind<IProductApplication>().To<ProductApplication>();
-
+            kernel.Bind<ILoggerApplication>().To<LoggerApplication>();
 
 
 
@@ -80,6 +80,11 @@ namespace IntegritasTeste.Web.App_Start
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
+            kernel.Bind<ILoggerRepository>().To<LoggerRepository>();
+
+            IntegritasTeste.Domain.Common.Extensions.Init(kernel);
+            
+       
 
         }        
     }

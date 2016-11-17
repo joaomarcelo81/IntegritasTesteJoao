@@ -4,9 +4,9 @@ using IntegritasTeste.Domain.Interface.Repositories;
 
 namespace IntegritasTeste.Application.Application
 {
-    public class CategoryApplication : BaseApplication<Category>, ICategoryApplication
+    public class LoggerApplication : BaseApplication<Logger>, ILoggerApplication
     {
-        public CategoryApplication(ICategoryRepository serviceBase)
+        public LoggerApplication(IBaseRepository<Logger> serviceBase)
             : base(serviceBase)
         {
         }

@@ -148,14 +148,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\app\module\" />
-    <Folder Include="Content\Controller\" />
     <Folder Include="Content\Module\" />
     <Folder Include="Content\View\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\App.js" />
+    <Content Include="Content\Controller\HomeController.js" />
+    <Content Include="Content\Controller\CheckoutController.js" />
+    <Content Include="Content\Controller\ProductsController.js" />
+    <Content Include="Content\Controller\ShoppingCartController.js" />
+    <Content Include="Content\Controller\StoreController.js" />
+    <Content Include="Helpers\Extensions.cs" />
+    <Compile Include="App_GlobalResources\GlobalResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWeb.cs" />
@@ -183,12 +195,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Scripts\angular.js" />
+    <Content Include="Content\Scripts\full\angular.js" />
     <Content Include="Content\Scripts\angular.min.js" />
-    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\full\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
-    <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <None Include="Content\Scripts\full\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\Scripts\full\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -198,13 +210,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Content\Scripts\_references.js" />
+    <Content Include="Content\Scripts\full\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Content\Scripts\full\jquery-1.10.2.min.map" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\ShoppingCart.cshtml" />
     <Content Include="Views\Store\Checkout.cshtml" />
@@ -229,6 +241,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GlobalResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GlobalResources.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -42,6 +42,9 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -69,10 +72,12 @@
     <Compile Include="Interface\Aplications\IBaseApplication.cs" />
     <Compile Include="Interface\Aplications\ICategoryApplication.cs" />
     <Compile Include="Interface\Aplications\ICustomerApplication.cs" />
+    <Compile Include="Interface\Aplications\ILoggerApplication.cs" />
     <Compile Include="Interface\Aplications\IProductApplication.cs" />
     <Compile Include="Interface\Repositories\ICategoryRepository.cs" />
     <Compile Include="Interface\Repositories\ICustomerRepostory.cs" />
     <Compile Include="Interface\Repositories\IBaseRepository.cs" />
+    <Compile Include="Interface\Repositories\ILoggerRepository.cs" />
     <Compile Include="Interface\Repositories\IProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
