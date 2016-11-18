@@ -18,17 +18,8 @@ namespace IntegritasTeste.DataContext.Repositories
 
         public new Category Get(long id)
         {
-            var category = Db.Set<Category>().Include("Products").FirstOrDefault(x => x.CategoryID == id);
+            return Db.Set<Category>().Include("Products").FirstOrDefault(x => x.CategoryID == id);
 
-
-            if (category != null)
-            {
-                foreach (var product in category.Products)
-                {
-                    product.Category = null;
-                }
-                return category;
-            }
         }
     }
 }
